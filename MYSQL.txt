@@ -1,0 +1,229 @@
+*DBMS:
+_______
+Data - collection of raw facts
+Database - Database is a place where the data will be stored in the memory in such a way that can be easily acceesible and modifiable.
+DBMS - A software that is maintaining and supervising all the operations of DB.
+EX:Oracle,MySql,MongoDB,MariaDB,SQL Servee,Postgre Sql.
+
+Database Models:
+_______________
+-Database model refers to data organization and structure in the database.
+various models-
+a)relational model: uses tables for storing data.
+b)entity relational model: uses entities for representing data.
+c)object-oriented model: uses objects and method.
+d)hierarchical model:uses tree like structures.
+e)network model:uses interconnected nodes to represent data.
+f)NoSql model: uses graphs,documents,key-value pairs for representing data(only NoSql databases).
+
+**MySQL is an RDBMS that uses relational model to organize and structure its data,which can be also called as tables.
+
+*SQL:
+_______
+-Structured qery language.
+-SQL is used for communicating with databases,so that we can store data into databases and access(or) modify the data in the database.
+-SQL is a common language used to communicate with all RDBMSs.
+
+USER - SQL - MySql
+	     - Oracle
+	     - PostgreSQL
+
+**SQL Commands:
+____________________
+-SQL is command based language.There are sub-languages in it.
+1.DDL - create,drop,truncate,rename,alter(rename,add,modify,drop)  
+2.DML - update,insert,delete
+3.DQL - select
+4.DCL - grant,revoke
+5.TCL - rollback,commit,savepoint
+
+
+**creation of DB:
+____________________
+Syntax : create database <database_name>;
+
+**see DB:
+_________
+
+show databases;
+
+**Use your DB:
+______________
+use <databse_name>;
+
+**clear DB:
+_____________
+cls;
+
+Ex: create database neha_db;
+    show databases;
+    use neha_db;
+
+*create of DB table:
+_________________________
+
+Syntax: create table <table_name>(col1 datatype,col2 datatype,....................... colN dataype);
+EX:create table employ(id int,name varchar,salary float,gender char(1),age int,email varchar(20),city varchart(20));
+
+Insert data into table:
+__________________________
+
+Syntax: insert into <table_name> values(val1,val2,.........valN);
+				(or)
+	  insert into <table_name>(col1,col2,..............colN) values(val1,val2,.........valN);
+				(or)
+	  insert into <table_name>(&col1,&col2,..............&colN) values(val1,val2,.........valN)........;
+
+
+NOT NULL USING ALTER: ALTER table tablename modify colName varchar() NOT NULL;
+
+Select command:
+--------------------
+
+This command is used to select the all or selected rows from the table.
+syntax-1: select *from <tablename>;
+syntax-2:select col1,col2,...colN from <tablename>;
+
+Ex: select *from doctors;
+    select doc_id,doc_name,doc_salary from doctors;
+
+select with WHERE clause:
+-----------------------------
+-apply condition on SELECT using WHERE clause.
+syntax:select col1,col2,...colN (or) * from <tablename> WHERE <cond>
+ex: select doc_id,doc_name,doc_salary from doctors where doc_salary>80000;
+
+update command:
+_____________________
+
+-This command is used to update one or more rows in the table.
+Syntax:update <tablename> set col1=val1,col2=val2,....colN=calN
+		[where <condition>];
+
+ex:update doctors set doc_dob='1996-07-26',doc_city='Hyderabad'
+		where doc_id = 1006;
+
+-this commad updates only doctor with id=1006
+ex:update doctors set doc_gen='f',doc_salary=doc_salary+3000;
+-this command updates all the rows in the table.
+
+*DELETE Command:-
+	-> This command is used to delete the one or more rows from the table.
+		Syntax-1:- DELETE from <tablename> where <condition>;
+			eg:- delete from doctors where doc_salary >80000;
+		Syntax-2:- DELETE from <tablename>;
+			eg:- delete from doctors;
+				-this command delete all rows from the table
+ 
+DESCRIBE command:-
+ 
+	-> This command is used to see the structure of the table
+		Synatx:- describe <tablename>;
+				(or)
+			   desc <tableName>;
+		eg:-  describe doctors;
+ 
+ 
+ 
+RENAME Command:-
+	-> This command is used to give a new name to the table.
+		Syntax:- RENAME <old_table_name> to <new_table_name>;
+ 
+	eg:- rename doctors to physicians;
+		-> select * from physicians;
+ 
+TRUNCATE command:-
+	-> This command is used to remove all the rows from the table.
+		Syntax:- truncate table <table_name>;
+			eg:- truncate table physicians;
+ 
+	NOTE:- 1. Once you apply the TRUNCATE command ,cannot be cancelled (or) rolled back.
+ 
+	       2. TRUNCATE can remove only the ROWS from the table .And it cannot remove the TABLE Structure.
+ 
+ 
+DROP command:-
+	-> This command drops (or) removes the entire table from the database permanently.
+	-> That means once you apply DROP command,you cannot cancel it.
+		Syntax:- DROP <table_name>;
+			eg:- drop physicians;
+ 
+	NOTE:- DROP command removes the rows from the table and also removes the structure of the table forever.
+ 
+ 
+ 
+DELETE vs TRUNCATE vs DROP:-
+ 
+	DELETE:- This command delete some or all rows from the table .You can cancel or rollback this command.
+	TRUNCATE:- This command deletes all rows from the table ,but it can not remove the table structure.
+			You cannot cancel or rollback this command.
+	DROP:- This command removes the entire table(along with data and structure)from the database.
+			you cannot cancel or rollback this command.
+ 
+ 
+Create a table from existing table:-
+ 
+	-> We can create a new table with the contents of an existing table.
+		Syntax:- create table <new_table_name> as select * from <existing_table_name>;
+			eg:- create table doctors as select * from physicians;
+	-> We can create a new table with some columns of an existing table.
+		Syntax:- create table <new_table_name> as select col1,col2 from <existing_table_name>;
+			eg:- create table doctors as select doc_id,doc_name from physicians;
+ 
+ 
+ALTER command:-
+	-> This command is used to perform operations at table level.
+	-> This command is used to add or drop or modify columns into the table.
+	-> This command is also used to add or drop constraints at the table level.
+		a) alter-add : This command adds a new column into the table.
+			eg:- alter table <table_name> add column <data_type>;
+		b) alter-drop : This command drops a column from the table.
+			eg:- alter table <table_name> drop column <col_name>;
+		c) alter-modify : This command modifies the column data type.
+			eg:- alter table<table_name> modify column <col_name> <new_datatype>;
+		d) alter - rename : This command renames the column area.
+
+__________________________________________________________________________________________________________________________________
+
+**MYSQL provides 3 categories of datatypes,which can be used to store character data,numeric data and date or time data.
+Datatypes:
+1.single types(CHAR,VARCHAR,BINARY,VARBINARY,TINYBLOB,TINYTEXT,TEXT,TEXT,BLOB,MEDIUMTEXT,MEDIUMBLOB,LONGTEXT,LONGBLOB)
+2.Numeric types(BIT,TINYBIT,BOOL,BOOLEAN,SMALLINT,MEDIUMINT,INT,INTEGER,BIGINT,FLOAT,DOUBLE,DECIMAL)
+3.Date types(DATE,DATETIME,TIMESTAMP,TIME,YEAR)
+
+Operators:
+-------------
+An operator is a symbol or word and that can be used within the SQL commands or queries to perform filter operations.
+
+Arithemetic: +,-,*,/,%
+Comparision:>,<,>=,<=,<>,!=,ALL,ANY,IS NULL,IS NOT NULL
+Logical:AND,OR,NOT,IS NULL,IS NOT NULL,BETWEEN AND,NOT BETWEEN AND
+Pattern matching:LIKE,NOT LIKE
+			IN,NOT IN
+
+These operators can be used with SELECT,UPADTE and DELETE commands,Especially we use them in WHERE clause.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+*SQL Functions:
+__________________
+
+1.Aggregate functions.
+-count(*,distinct)
+-sum,sum(distinct)
+-min
+-max
+-avg
+2.Numeric functions
+3.
+
+*Intergrity constraints:
+____________________________
+
+-entity con
+-domain con
+-referential cons
+
+*Joins:
+-----------------------
